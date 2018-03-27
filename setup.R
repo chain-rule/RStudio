@@ -6,5 +6,4 @@ packages <- c(
   'ggplot2',
   'rmarkdown'
 )
-
 install.packages(packages, repos = 'http://cran.us.r-project.org')
