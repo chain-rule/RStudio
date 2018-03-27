@@ -14,6 +14,8 @@ start:
 	@echo "Address:  ${gc}http://localhost:8787/${nc}"
 	@echo "User:     ${gc}rstudio${nc}"
 	@echo "Password: ${gc}rstudio${nc}"
+	@echo
+	@echo 'Press CTRL-C to terminate...'
 	@docker run \
 		--interactive \
 		--tty \
