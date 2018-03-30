@@ -5,7 +5,7 @@ gc = \033[0;32m
 nc = \033[0m
 
 alias:
-	@echo "alias rstudio='make -f \"${PWD}/Makefile\" root=\"\$${PWD}\" start'" >> ~/.bash_profile
+	@echo "alias ${name}='make -f \"${PWD}/Makefile\" root=\"\$${PWD}\" start'" >> ~/.bash_profile
 
 image:
 	docker rmi ${name} || true
@@ -22,8 +22,8 @@ start:
 		--tty \
 		--rm \
 		--name ${name} \
-		-v "${root}:/home/rstudio" \
-		-w /home/rstudio \
+		-v "${root}:/home/${name}" \
+		-w "/home/${name}" \
 		-p 8787:8787 \
 		${name} > /dev/null
 
