@@ -9,7 +9,7 @@ alias:
 
 image:
 	docker rmi ${name} || true
-	docker build -t ${name} .
+	docker build --tag ${name} .
 
 start:
 	@echo "Address:  ${gc}http://localhost:8787/${nc}"
@@ -22,9 +22,9 @@ start:
 		--tty \
 		--rm \
 		--name ${name} \
-		-v "${root}:/home/${name}" \
-		-w "/home/${name}" \
-		-p 8787:8787 \
+		--volume "${root}:/home/${name}" \
+		--workdir "/home/${name}" \
+		--publish 8787:8787 \
 		${name} > /dev/null
 
 .PHONY: alias image start
