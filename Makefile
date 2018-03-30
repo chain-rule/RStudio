@@ -4,7 +4,8 @@ root ?= ${PWD}
 gc = \033[0;32m
 nc = \033[0m
 
-all: start
+alias:
+	@echo "alias rstudio='make -f \"${PWD}/Makefile\" root=\"\$${PWD}\" start'" >> ~/.bash_profile
 
 image:
 	docker rmi ${name} || true
@@ -26,4 +27,4 @@ start:
 		-p 8787:8787 \
 		${name} > /dev/null
 
-.PHONY: all image start
+.PHONY: alias image start

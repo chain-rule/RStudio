@@ -7,10 +7,7 @@ A Docker image for running [RStudio] without installing anything locally.
 
 ```bash
 make image
-```
-
-```bash
-echo "alias rstudio='make -f \"${PWD}/Makefile\" root=\"\${PWD}\"'" >> ~/.bash_profile
+make alias
 ```
 
 ## Usage
