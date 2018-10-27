@@ -22,6 +22,7 @@ start:
 		--tty \
 		--rm \
 		--name ${name} \
+		--env PASSWORD=password \
 		--volume "${root}:/home/${name}" \
 		--workdir "/home/${name}" \
 		--publish 8787:8787 \
