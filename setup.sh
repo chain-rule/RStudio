@@ -5,4 +5,5 @@ apt-get install -y \
   imagemagick \
   libxml2-dev \
   texlive \
-  texlive-latex-extra
+  texlive-latex-extra \
+  zlib1g-dev

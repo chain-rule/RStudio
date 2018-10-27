@@ -3,7 +3,9 @@ packages <- c(
   'caTools',
   'car',
   'corrplot',
+  'ggrepel',
   'glmnet',
+  'plotly',
   'rmarkdown',
   'tidyverse'
 )
