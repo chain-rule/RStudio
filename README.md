@@ -1,6 +1,7 @@
 # RStudio
 
-A Docker image for running [RStudio] without installing anything locally.
+The repository provides a Docker image for running [RStudio] without installing
+anything locally.
 
 ## Installation
 
