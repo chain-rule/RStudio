@@ -4,12 +4,12 @@ root ?= ${PWD}
 gc = \033[0;32m
 nc = \033[0m
 
-alias:
-	@echo "alias ${name}='make -f \"${PWD}/Makefile\" root=\"\$${PWD}\" start'" >> ~/.bash_profile
-
-image:
+build:
 	docker rmi ${name} || true
 	docker build --tag ${name} .
+
+link:
+	@echo "alias ${name}='make -f \"${PWD}/Makefile\" root=\"\$${PWD}\" start'" >> ~/.bash_profile
 
 start:
 	@echo "Address:  ${gc}http://localhost:8787/${nc}"
@@ -28,4 +28,4 @@ start:
 		--publish 8787:8787 \
 		${name} > /dev/null
 
-.PHONY: alias image start
+.PHONY: build link start
