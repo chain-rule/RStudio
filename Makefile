@@ -9,7 +9,7 @@ build:
 	docker build --tag ${name} .
 
 link:
-	@echo "alias ${name}='make -f \"${PWD}/Makefile\" root=\"\$${PWD}\" start'" >> ~/.bash_profile
+	echo "alias ${name}='make -f \"${PWD}/Makefile\" root=\"\$${PWD}\" start'" >> ~/.bash_profile
 
 start:
 	@echo "Address:  ${gc}http://localhost:8787/${nc}"
