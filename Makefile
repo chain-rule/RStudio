@@ -13,6 +13,13 @@ build:
 link:
 	echo "alias ${name}='make -f \"${PWD}/Makefile\" root=\"\$${PWD}\"'" >> ~/.bash_profile
 
+shell:
+	docker exec \
+		--interactive \
+		--tty \
+		${name} \
+		/bin/bash
+
 start:
 	@echo "Address:  ${gc}http://localhost:8787/${nc}"
 	@echo "User:     ${gc}rstudio${nc}"
@@ -20,14 +27,14 @@ start:
 	@echo
 	@echo 'Press CTRL-C to terminate...'
 	@docker run \
-		--interactive \
-		--tty \
-		--rm \
-		--name ${name} \
 		--env PASSWORD=password \
+		--interactive \
+		--name ${name} \
+		--publish 8787:8787 \
+		--rm \
+		--tty \
 		--volume "${root}:/home/${name}" \
 		--workdir "/home/${name}" \
-		--publish 8787:8787 \
 		${name} > /dev/null
 
-.PHONY: all build link start
+.PHONY: all build link shell start
