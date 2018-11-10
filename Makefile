@@ -1,5 +1,6 @@
 name ?= rstudio
 root ?= ${PWD}
+this := $(shell dirname $(realpath $(lastword ${MAKEFILE_LIST})))
 
 gc = \033[0;32m
 nc = \033[0m
@@ -11,7 +12,7 @@ build:
 	docker build --tag ${name} .
 
 link:
-	echo "alias ${name}='make -f \"${PWD}/Makefile\" root=\"\$${PWD}\"'" >> ~/.bash_profile
+	echo "alias ${name}='make -C \"${PWD}\" root=\"\$${PWD}\"'" >> ~/.bash_profile
 
 shell:
 	docker exec \
@@ -20,7 +21,7 @@ shell:
 		${name} \
 		/bin/bash
 
-start:
+start: ${root}/.rstudio
 	@echo "Address:  ${gc}http://localhost:8787/${nc}"
 	@echo "User:     ${gc}rstudio${nc}"
 	@echo "Password: ${gc}password${nc}"
@@ -36,5 +37,9 @@ start:
 		--volume "${root}:/home/${name}" \
 		--workdir "/home/${name}" \
 		${name} > /dev/null
+
+${root}/.rstudio:
+	@cp -R "${this}/.rstudio" "$@"
+	@make -C "$@" > /dev/null
 
 .PHONY: all build link shell start
