@@ -26,7 +26,7 @@ start: ${root}/.rstudio
 	@echo "User:     ${gc}rstudio${nc}"
 	@echo "Password: ${gc}password${nc}"
 	@echo
-	@echo 'Press CTRL-C to terminate...'
+	@echo 'Press Control-C to terminate...'
 	@docker run \
 		--env PASSWORD=password \
 		--interactive \
