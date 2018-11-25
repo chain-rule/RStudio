@@ -1,10 +1,6 @@
 packages <- c(
-  'Information',
-  'caTools',
   'car',
-  'corrplot',
   'devtools',
-  'ggrepel',
   'glmnet',
   'plotly',
   'rmarkdown',
