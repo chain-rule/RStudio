@@ -1,4 +1,5 @@
 packages <- c(
+  'caTools',
   'car',
   'devtools',
   'glmnet',
