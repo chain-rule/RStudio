@@ -42,4 +42,9 @@ ${root}/.rstudio:
 	@cp -R "${this}/.rstudio" "$@"
 	@make -C "$@" > /dev/null
 
-.PHONY: all build link shell start
+ifdef profile
+profile:
+	cp -a .profile/${profile}/. .rstudio/
+endif
+
+.PHONY: all build link profile shell start

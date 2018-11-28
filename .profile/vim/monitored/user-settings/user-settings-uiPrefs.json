@@ -1,0 +1,14 @@
+{
+  "clear_hidden" : true,
+  "enable_snippets": false,
+  "highlight_selected_line": true,
+  "insert_matching" : false,
+  "insert_parens_after_function_completion" : false,
+  "packages_pane_enabled": false,
+  "scroll_past_end_of_document": true,
+  "show_indent_guides" : true,
+  "show_margin": true,
+  "show_publish_ui": false,
+  "toolbar_visible": false,
+  "use_vim_mode": true
+}
