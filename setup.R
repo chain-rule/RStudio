@@ -5,6 +5,7 @@ packages <- c(
   'glmnet',
   'plotly',
   'rmarkdown',
+  'rstan',
   'testthat',
   'tidyverse'
 )
