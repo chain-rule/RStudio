@@ -1,5 +1,8 @@
-name ?= rstudio
+# The name of the Docker image
+name := rstudio
+# The directory to be mounted to the container
 root ?= ${PWD}
+
 this := $(shell dirname $(realpath $(lastword ${MAKEFILE_LIST})))
 
 gc = \033[0;32m
@@ -7,20 +10,16 @@ nc = \033[0m
 
 all: start
 
+# Create an alias for starting a new container
+alias:
+	echo "alias ${name}='make -C \"${PWD}\" root=\"\$${PWD}\"'" >> ~/.$(if ${ZSH_NAME},bash,zsh)rc
+
+# Build a new image
 build:
 	docker rmi ${name} || true
 	docker build --tag ${name} .
 
-link:
-	echo "alias ${name}='make -C \"${PWD}\" root=\"\$${PWD}\"'" >> ~/.bash_profile
-
-shell:
-	docker exec \
-		--interactive \
-		--tty \
-		${name} \
-		/bin/bash
-
+# Start a new container
 start: ${root}/.rstudio
 	@echo "Address:  ${gc}http://localhost:8787/${nc}"
 	@echo "User:     ${gc}rstudio${nc}"
@@ -38,6 +37,10 @@ start: ${root}/.rstudio
 		--workdir "/home/${name}" \
 		${name} > /dev/null
 
+# Start a shell in a running container
+shell:
+	@docker exec --interactive --tty ${name} /bin/bash
+
 ${root}/.rstudio:
 	@cp -R "${this}/.rstudio" "$@"
 	@make -C "$@" > /dev/null
@@ -47,4 +50,4 @@ profile:
 	cp -a .profile/${profile}/. .rstudio/
 endif
 
-.PHONY: all build link profile shell start
+.PHONY: all alias build start shell profile
