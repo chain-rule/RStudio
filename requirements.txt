@@ -1,0 +1,10 @@
+caTools
+car
+devtools
+glmnet
+plotly
+rmarkdown
+rstan
+testthat
+tidytext
+tidyverse

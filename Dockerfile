@@ -1,7 +1,10 @@
+# Start with an RStudio image
 FROM rocker/rstudio:latest
 
-COPY setup.sh /tmp/setup.sh
-RUN bash /tmp/setup.sh
+# Install the software that R packages require
+RUN apt-get update
+RUN apt-get install -y imagemagick libxml2-dev texlive texlive-latex-extra zlib1g-dev
 
-COPY setup.R /tmp/setup.R
-RUN R < /tmp/setup.R
+# Install the desired R packages
+COPY requirements.txt /tmp/requirements.txt
+RUN echo "install.packages(readLines('/tmp/requirements.txt'))" | R
