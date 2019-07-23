@@ -36,6 +36,5 @@ shell:
 
 ${root}/.rstudio:
 	@cp -R "${this}/.rstudio" "$@"
-	@make -C "$@" > /dev/null
 
 .PHONY: all alias build start shell
