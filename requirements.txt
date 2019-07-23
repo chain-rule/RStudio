@@ -1,5 +1,3 @@
-caTools
-car
 devtools
 glmnet
 plotly
