@@ -34,6 +34,7 @@ start: ${root}/.rstudio
 shell:
 	@docker exec --interactive --tty ${name} /bin/bash
 
+# Copy user preferences upon start
 ${root}/.rstudio:
 	@cp -R "${this}/.rstudio" "$@"
 
