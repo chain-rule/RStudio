@@ -9,3 +9,6 @@ RUN apt-get install -y libxml2-dev texlive texlive-latex-extra zlib1g-dev
 COPY requirements.txt /tmp/requirements.txt
 RUN echo "install.packages(readLines('/tmp/requirements.txt'), \
                            repos = 'http://cran.us.r-project.org')" | R
+
+# Set the working directory
+WORKDIR /home/rstudio
