@@ -5,9 +5,6 @@ root ?= ${PWD}
 
 this := $(shell dirname $(realpath $(lastword ${MAKEFILE_LIST})))
 
-gc = \033[0;32m
-nc = \033[0m
-
 all: start
 
 # Create an alias for starting a new container
@@ -21,21 +18,17 @@ build:
 
 # Start a new container
 start: ${root}/.rstudio
-	@echo "Address:  ${gc}http://localhost:8787/${nc}"
-	@echo "User:     ${gc}rstudio${nc}"
-	@echo "Password: ${gc}password${nc}"
+	@echo "Address:  http://localhost:8787/"
+	@echo "User:     rstudio"
+	@echo "Password: rstud10"
 	@echo
 	@echo 'Press Control-C to terminate...'
-	@docker run \
-		--env PASSWORD=password \
-		--interactive \
+	@docker run --interactive --tty --rm \
 		--name ${name} \
 		--publish 8787:8787 \
-		--rm \
-		--tty \
-		--volume "${root}:/home/${name}" \
-		--workdir "/home/${name}" \
-		${name} > /dev/null
+		--volume "${root}:/home/rstudio" \
+		--env PASSWORD=rstud10 \
+		${name}
 
 # Start a shell in a running container
 shell:
