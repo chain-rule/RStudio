@@ -28,7 +28,7 @@ start: ${root}/.rstudio
 		--publish 8787:8787 \
 		--volume "${root}:/home/rstudio" \
 		--env PASSWORD=rstud10 \
-		${name}
+		${name} > /dev/null
 
 # Start a shell in a running container
 shell:
@@ -38,9 +38,4 @@ ${root}/.rstudio:
 	@cp -R "${this}/.rstudio" "$@"
 	@make -C "$@" > /dev/null
 
-ifdef profile
-profile:
-	cp -a .profile/${profile}/. .rstudio/
-endif
-
-.PHONY: all alias build start shell profile
+.PHONY: all alias build start shell
