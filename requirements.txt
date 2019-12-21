@@ -4,6 +4,7 @@ glmnet
 plotly
 rmarkdown
 rstan
+rstanarm
 testthat
 tidytext
 tidyverse
