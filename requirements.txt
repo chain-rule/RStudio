@@ -1,4 +1,5 @@
 bayesplot
+brms
 devtools
 glmnet
 plotly
