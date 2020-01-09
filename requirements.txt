@@ -7,5 +7,6 @@ rmarkdown
 rstan
 rstanarm
 testthat
+tidybayes
 tidytext
 tidyverse
