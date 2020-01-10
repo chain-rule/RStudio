@@ -13,11 +13,10 @@ alias:
 
 # Build a new image
 build:
-	docker rmi ${name} || true
 	docker build --tag ${name} .
 
 # Start a new container
-start: ${root}/.rstudio
+start:
 	@echo "Address:  http://localhost:8787/"
 	@echo "User:     rstudio"
 	@echo "Password: rstud10"
@@ -26,16 +25,12 @@ start: ${root}/.rstudio
 	@docker run --interactive --tty --rm \
 		--name ${name} \
 		--publish 8787:8787 \
-		--volume "${root}:/home/rstudio" \
+		--volume "${root}:/home/rstudio/$(shell basename ${root})" \
 		--env PASSWORD=rstud10 \
 		${name} > /dev/null
 
 # Start a shell in a running container
 shell:
 	@docker exec --interactive --tty ${name} /bin/bash
-
-# Copy user preferences upon start
-${root}/.rstudio:
-	@cp -R "${this}/.rstudio" "$@"
 
 .PHONY: all alias build start shell
