@@ -3,8 +3,6 @@ name := rstudio
 # The directory to be mounted to the container
 root ?= ${PWD}
 
-this := $(shell dirname $(realpath $(lastword ${MAKEFILE_LIST})))
-
 all: start
 
 # Create an alias for starting a new container
