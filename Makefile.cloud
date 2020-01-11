@@ -1,0 +1,48 @@
+project ?= $(shell gcloud config get-value project)
+user ?= $(shell git config --global user.name | tr '[:upper:] ' '[:lower:]-')
+registry ?= eu.gcr.io
+image ?= rstudio-${user}
+machine ?= n2-standard-8
+zone ?= europe-west1-b
+
+all: start
+
+build:
+	docker build --file Dockerfile.cloud --tag ${image} .
+	docker tag ${image} ${registry}/${project}/${image}
+	docker push ${registry}/${project}/${image}
+
+create:
+	gcloud compute instances create-with-container ${image} \
+		--container-image ${registry}/${project}/${image} \
+		--create-disk name=${image}-pd-ssd,size=50,type=pd-ssd,auto-delete=yes \
+		--container-mount-disk name=${image}-pd-ssd,mount-path=/home/rstudio/projects \
+		--container-env PASSWORD=rstud10 \
+		--container-restart-policy never \
+		--machine-type ${machine} \
+		--no-restart-on-failure \
+		--scopes default,bigquery \
+		--zone ${zone}
+
+delete:
+	gcloud compute instances delete ${image} \
+		--delete-disks all \
+		--zone ${zone} \
+		--quiet
+
+shell:
+	gcloud compute ssh --zone ${zone} ${image} -- \
+		'docker exec --interactive --tty $$(docker ps | grep ${image} | cut -d" " -f1) zsh'
+
+start:
+	@echo 'Address:  http://localhost:8787/'
+	@echo 'Username: rstudio'
+	@echo 'Password: rstud10'
+	@echo ''
+	gcloud compute instances start ${image} --zone ${zone}
+	gcloud compute ssh ${image} --zone ${zone} -- -L 8787:localhost:8787
+
+stop:
+	gcloud compute instances stop ${image} --zone ${zone}
+
+.PHONY: all build create delete shell start stop
