@@ -1,7 +1,6 @@
 bayesplot
 brms
 devtools
-glmnet
 plotly
 rmarkdown
 rstan
