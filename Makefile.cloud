@@ -1,11 +1,17 @@
+name := rstudio
+
 project ?= $(shell gcloud config get-value project)
 user ?= $(shell git config --global user.name | tr '[:upper:] ' '[:lower:]-')
+
 registry ?= eu.gcr.io
-image ?= rstudio-${user}
+image ?= ${name}-${user}
 machine ?= n2-standard-8
 zone ?= europe-west1-b
 
 all: start
+
+alias:
+	echo "alias ${name}='make -f \"${PWD}/Makefile.cloud\"'" >> ~/.$(if ${ZSH_NAME},bash,zsh)rc
 
 build:
 	docker build --file Dockerfile.cloud --tag ${image} .
@@ -16,7 +22,7 @@ create:
 	gcloud compute instances create-with-container ${image} \
 		--container-image ${registry}/${project}/${image} \
 		--create-disk name=${image}-pd-ssd,size=50,type=pd-ssd,auto-delete=yes \
-		--container-mount-disk name=${image}-pd-ssd,mount-path=/home/rstudio/projects \
+		--container-mount-disk name=${image}-pd-ssd,mount-path=/home/${name}/projects \
 		--container-env PASSWORD=rstud10 \
 		--container-restart-policy never \
 		--machine-type ${machine} \
@@ -42,4 +48,4 @@ shell start:
 stop:
 	gcloud compute instances stop ${image} --zone ${zone}
 
-.PHONY: all build create delete shell start stop
+.PHONY: alias all build create delete shell start stop

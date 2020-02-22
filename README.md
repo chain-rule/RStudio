@@ -3,29 +3,57 @@
 The repository provides a scaffold for building a Docker image for running
 [RStudio].
 
-## Installation
+## Local
 
-Build a Docker image:
+### Installation
 
 ```sh
+# Build a Docker image:
 make build
-```
 
-Create an alias `rstudio` for starting a container:
-
-```sh
+# Create an alias for convenience:
 make alias
 ```
 
-Restart the shell.
-
-## Usage
-
-Go to an arbitrary directory and use the `rstudio` alias:
+### Usage
 
 ```sh
+# Go to an arbitrary directory:
 cd /path/to/some/project
+
+# Start a container:
 rstudio
+```
+
+## Cloud
+
+### Installation
+
+```sh
+# Build a Docker image and push to Container Registry:
+make -f Makefile.cloud build
+
+# Create an alias for convenience:
+make -f Makefile.cloud alias
+```
+
+### Usage
+
+```sh
+# Create a virtual machine in Compute Engine:
+rstudio create
+
+# Start the machine and connect via SSH:
+rstudio start
+
+# Open the web interface:
+open http://localhost:8080
+
+# Stop the machine:
+rstudio stop
+
+# Delete the machine:
+rstudio delete
 ```
 
 [RStudio]: https://www.rstudio.com/
