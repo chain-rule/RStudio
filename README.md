@@ -43,8 +43,11 @@ make -f Makefile.cloud alias
 # Create a virtual machine in Compute Engine:
 rstudio create
 
-# Start the machine and connect via SSH:
+# Start the machine:
 rstudio start
+
+# Open a shell:
+rstudio shell
 
 # Open the web interface:
 open http://localhost:8080

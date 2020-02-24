@@ -36,14 +36,16 @@ delete:
 		--zone ${zone} \
 		--quiet
 
-shell start:
+shell:
 	@echo 'Address:  http://localhost:8787/'
 	@echo 'Username: rstudio'
 	@echo 'Password: rstud10'
 	@echo ''
-	gcloud compute instances start ${image} --zone ${zone}
 	gcloud compute ssh ${image} --zone ${zone} -- -L 8787:localhost:8787 \
 		'docker exec --interactive --tty $$(docker ps -q --filter="name=${image}") zsh'
+
+start:
+	gcloud compute instances start ${image} --zone ${zone}
 
 stop:
 	gcloud compute instances stop ${image} --zone ${zone}
