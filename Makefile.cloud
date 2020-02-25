@@ -8,7 +8,7 @@ image ?= ${name}-${user}
 machine ?= n2-standard-8
 zone ?= europe-west1-b
 
-all: start
+all: shell
 
 alias:
 	echo "alias ${name}='make -f \"${PWD}/Makefile.cloud\"'" >> ~/.$(if ${ZSH_NAME},bash,zsh)rc
