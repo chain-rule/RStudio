@@ -21,13 +21,14 @@ build:
 create:
 	gcloud compute instances create-with-container ${image} \
 		--container-image ${registry}/${project}/${image} \
-		--create-disk name=${image}-pd-ssd,size=50,type=pd-ssd,auto-delete=yes \
+		--boot-disk-size 200 \
+		--create-disk name=${image}-pd-ssd,size=200,type=pd-ssd,auto-delete=yes \
 		--container-mount-disk name=${image}-pd-ssd,mount-path=/home/${name}/projects \
 		--container-env PASSWORD=rstud10 \
 		--container-restart-policy never \
 		--machine-type ${machine} \
 		--no-restart-on-failure \
-		--scopes default,bigquery \
+		--scopes default,bigquery,compute-rw,storage-rw \
 		--zone ${zone}
 
 delete:
