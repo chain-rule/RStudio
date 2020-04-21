@@ -12,7 +12,7 @@ The repository provides a scaffold for building a Docker image for running
 make build
 
 # Create an alias for convenience:
-make alias
+make alias >> ~/.zshrc
 ```
 
 ### Usage
@@ -34,7 +34,7 @@ rstudio
 make -f Makefile.cloud build
 
 # Create an alias for convenience:
-make -f Makefile.cloud alias
+make -f Makefile.cloud alias >> ~/.zshrc
 ```
 
 ### Usage

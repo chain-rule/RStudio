@@ -11,7 +11,7 @@ zone ?= europe-west1-b
 all: shell
 
 alias:
-	echo "alias ${name}='make -f \"${PWD}/Makefile.cloud\"'" >> ~/.$(if ${ZSH_NAME},bash,zsh)rc
+	echo "alias ${name}='make -f \"${PWD}/Makefile.cloud\"'"
 
 build:
 	docker build --file Dockerfile.cloud --tag ${image} .

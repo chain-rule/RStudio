@@ -7,7 +7,7 @@ all: start
 
 # Create an alias for starting a new container
 alias:
-	echo "alias ${name}='make -C \"${PWD}\" root=\"\$${PWD}\"'" >> ~/.$(if ${ZSH_NAME},bash,zsh)rc
+	@echo "alias ${name}='make -C \"${PWD}\" root=\"\$${PWD}\"'"
 
 # Build a new image
 build:
