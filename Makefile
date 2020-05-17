@@ -15,9 +15,9 @@ build:
 
 # Start a new container
 start:
-	@echo "Address:  http://localhost:8787/"
-	@echo "User:     rstudio"
-	@echo "Password: rstud10"
+	@echo 'Address:  http://localhost:8787/'
+	@echo 'Username: rstudio'
+	@echo 'Password: rstud10'
 	@echo
 	@echo 'Press Control-C to terminate...'
 	@docker run --interactive --tty --rm \

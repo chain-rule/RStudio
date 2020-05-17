@@ -41,8 +41,11 @@ shell:
 	@echo 'Address:  http://localhost:8787/'
 	@echo 'Username: rstudio'
 	@echo 'Password: rstud10'
-	@echo ''
-	gcloud compute ssh ${image} --zone ${zone} -- -L 8787:localhost:8787 \
+	@echo
+	gcloud compute ssh ${image} \
+		--zone ${zone} \
+		-- \
+		-L 8787:localhost:8787 \
 		'docker exec --interactive --tty $$(docker ps -q --filter="name=${image}") zsh'
 
 start:
