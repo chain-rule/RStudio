@@ -14,7 +14,7 @@ alias:
 	echo "alias ${name}='make -f \"${PWD}/Makefile.cloud\"'"
 
 build:
-	docker build --file Dockerfile.cloud --tag ${image} .
+	docker build --tag ${name} .
 	docker tag ${image} ${registry}/${project}/${image}
 	docker push ${registry}/${project}/${image}
 
