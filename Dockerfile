@@ -23,5 +23,3 @@ RUN echo "install.packages(readLines('/tmp/requirements.txt'), \
 COPY .rstudio /home/rstudio/.rstudio
 
 WORKDIR /home/rstudio/projects
-
-# vim: set ft=dockerfile:
