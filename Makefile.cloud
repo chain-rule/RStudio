@@ -24,7 +24,7 @@ create:
 		--boot-disk-size 200 \
 		--create-disk name=${image}-pd-ssd,size=200,type=pd-ssd,auto-delete=yes \
 		--container-mount-disk name=${image}-pd-ssd,mount-path=/home/${name}/projects \
-		--container-env PASSWORD=rstud10 \
+		--container-env DISABLE_AUTH=true \
 		--container-restart-policy never \
 		--machine-type ${machine} \
 		--no-restart-on-failure \
@@ -39,8 +39,6 @@ delete:
 
 shell:
 	@echo 'Address:  http://localhost:8787/'
-	@echo 'Username: rstudio'
-	@echo 'Password: rstud10'
 	@echo
 	gcloud compute ssh ${image} \
 		--zone ${zone} \

@@ -16,15 +16,13 @@ build:
 # Start a new container
 start:
 	@echo 'Address:  http://localhost:8787/'
-	@echo 'Username: rstudio'
-	@echo 'Password: rstud10'
 	@echo
 	@echo 'Press Control-C to terminate...'
 	@docker run --interactive --tty --rm \
 		--name ${name} \
 		--publish 8787:8787 \
 		--volume "${root}:/home/rstudio/$(shell basename ${root})" \
-		--env PASSWORD=rstud10 \
+		--env DISABLE_AUTH=true \
 		${name} > /dev/null
 
 # Start a shell in a running container
