@@ -18,7 +18,7 @@ RUN ssh-keygen -t ed25519 -N '' -f ~/.ssh/id_ed25519
 USER root
 
 # Install R packages
-RUN apt-get install -y imagemagick libxml2-dev texlive texlive-latex-extra zlib1g-dev
+RUN apt-get install -y imagemagick libv8-dev libxml2-dev texlive texlive-latex-extra zlib1g-dev
 COPY requirements.txt /tmp/requirements.txt
 RUN echo "install.packages(readLines('/tmp/requirements.txt'), \
                            repos = 'http://cran.us.r-project.org')" | R
