@@ -5,9 +5,10 @@ root ?= ${PWD}
 
 all: start
 
-# Create an alias for starting a new container
+# Create an alias for starting a new container and one for a shell prompt
 alias:
 	@echo "alias ${name}='make -C \"${PWD}\" root=\"\$${PWD}\"'"
+	@echo "alias ${name}-shell='docker exec -it \$$(docker ps --format \"table {{.ID}}\" | tail -1) /bin/zsh'"
 
 # Build a new image
 build:
