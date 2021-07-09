@@ -50,7 +50,13 @@ rstudio start
 rstudio shell
 
 # Open the web interface:
-open http://localhost:8080
+open http://localhost:8787
+
+# Suspend the machine:
+rstudio suspend
+
+# Resume the machine:
+rstudio resume
 
 # Stop the machine:
 rstudio stop

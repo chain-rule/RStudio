@@ -11,7 +11,7 @@ zone ?= europe-west1-b
 all: shell
 
 alias:
-	echo "alias ${name}='make -f \"${PWD}/Makefile.cloud\"'"
+	@echo "alias ${name}='make -f \"${PWD}/Makefile.cloud\"'"
 
 build:
 	docker build --tag ${name} .
@@ -46,10 +46,7 @@ shell:
 		-L 8787:localhost:8787 \
 		'docker exec --interactive --tty $$(docker ps -q --filter="name=${image}") zsh'
 
-start:
-	gcloud compute instances start ${image} --zone ${zone}
+%:
+	gcloud beta compute instances $@ ${image} --zone ${zone}
 
-stop:
-	gcloud compute instances stop ${image} --zone ${zone}
-
-.PHONY: alias all build create delete shell start stop
+.PHONY: alias all build create delete shell
